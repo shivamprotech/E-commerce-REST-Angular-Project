@@ -1,0 +1,19 @@
+<div class="container my-4 myform">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form class="form" [formGroup]="LoginUser" (ngSubmit)="login()">
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="text" placeholder="Username" class="form-control" formControlName="username">
+                </div>
+                <div class="form-group">
+                    <label for="Paasword">Password</label>
+                    <input type="password" placeholder="Password" class="form-control" formControlName="password">
+                </div>
+                <input type="submit" class="btn btn-success" value="Login">
+            </form>
+        </div>
+    </div>
+</div>
+
+    

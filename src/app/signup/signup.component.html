@@ -1,0 +1,80 @@
+<div class="container my-4">
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form" [formGroup]="createUser" (ngSubmit)="createuser()">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="First name" formControlName='first_name'>
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a Valid Firstname.
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name" formControlName='last_name'>
+                            </div>
+
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a Valid Firstname.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Date of Birth">Date of Birth</label>
+                        <input type="date" placeholder="Date of Birth" class="form-control" formControlName='date_of_birth'>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Username" formControlName='username'>
+                            </div>
+
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a Valid Firstname.
+                            </div>
+                            <div class="col">
+                                <input type="password" class="form-control" placeholder="Password" formControlName='password'>
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a Valid Firstname.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" placeholder="Email" class="form-control" formControlName='email'>
+
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a Valid Firstname.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <input type="text" placeholder="Address" class="form-control" formControlName='address'>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone No</label>
+                        <input type="text" placeholder="Phone" class="form-control" formControlName='phone_number'>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Sign Up">
+                </form>
+            </div>
+        </div>
+    </div>
+    
