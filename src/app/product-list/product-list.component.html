@@ -1,6 +1,5 @@
 <div class='container'>
-    <button class="btn btn-success" (click)="getProductList()">Show All Products</button>
-    <table class="table table-striped table-borderd">
+    <!-- <table class="table table-striped table-borderd">
         <thead>
             <tr>
                 <td>Product Name</td>
@@ -11,9 +10,37 @@
         <tbody>
             <tr *ngFor="let product of products" [attr.id]="product.id">
                 <td>{{product.name}}</td>
-                <td>{{product.cost}}</td>
-                <td><button class="btn btn-danger" (click)=deleteProductComponent(product) > Delete </button></td>
+                <td>Rs. {{product.cost}}</td>
+                <td><button class="btn btn-info" (click)=detailProductComponent(product)> Details </button></td>
+                <td><button class="btn btn-success"> Add To Cart </button></td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
+    <div class="row">
+        <div class="col-md-4 mt-4" *ngFor="let product of products">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title text-center">
+                        {{product?.name}}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <img src="../../assets/details_1.jpg" class="img-fluid">
+                </div>
+                <hr>
+                <span class="text-center">Rs. {{product?.cost}} /-</span>
+                <div class="card-footer text-center">
+                    {{product?.description}}
+                </div>
+                <div class="row text-center mb-2">
+                    <div class="col">
+                        <button class="btn btn-info" (click)=detailProductComponent(product)> Details </button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success"> Add To Cart </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

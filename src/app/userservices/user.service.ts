@@ -24,6 +24,7 @@ export class UserService {
 
     setToken(token: string) {
         localStorage.setItem('token', token);
+        // localStorage.setItem('key', key);
     }
 
     getToken() {

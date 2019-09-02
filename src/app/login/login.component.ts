@@ -20,6 +20,7 @@ export class LoginComponent {
   login() {
     this.loginservice.createloginservice(this.LoginUser.getRawValue()).subscribe(
       data => {
+        console.log(data);
         this.loginservice.setToken(data.token);
         this.router.navigate(['']);
       },

@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { UserService } from './userservices/user.service';
 import { ProductService } from './product-list/product.service';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ProductService } from './product-list/product.service';
     SignupComponent,
     LogoutComponent,
     HomeComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

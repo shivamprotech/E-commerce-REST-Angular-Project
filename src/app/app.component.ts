@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from './userservices/user.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductService } from './product-list/product.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,24 +11,40 @@ import { ProductService } from './product-list/product.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'second-project';
-  constructor(private userService: UserService,
-              private router: Router,
-              private productlist: ProductService) { }
+    title = 'second-project';
+    products: any[];
+    searchName: any;
+     constructor(private userService: UserService,
+                 private router: Router,
+                 private productlist: ProductService, private fb: FormBuilder) { }
 
-  isLogin() {
-    return this.userService.isLoggedIn();
-  }
+        searchProductName = this.fb.group({
+            search : ['']
+        });
 
-  islogout() {
-    this.userService.logoutuser();
-    this.userService.deleteToken();
-    this.router.navigate(['']);
-  }
+    isLogin() {
+        return this.userService.isLoggedIn();
+    }
 
-  getproduct() {
-    return this.productlist.getProducts().subscribe(
-      data => this.router.navigate(['/product']));
+    islogout() {
+        this.userService.logoutuser();
+        this.userService.deleteToken();
+        this.router.navigate(['']);
+    }
 
-  }
+//   getproduct() {
+//     return this.productlist.getProducts().subscribe(
+//       data => {this.products = data;
+//                this.router.navigate(['/product']);
+//       });
+//   }
+
+    getproduct() {
+        return this.router.navigate(['/product']);
+    }
+
+    searchProductComponent() {
+        this.searchName = this.searchProductName.get('search').value;
+        return this.router.navigate(['/product', {search: this.searchName }]);
+    }
 }
