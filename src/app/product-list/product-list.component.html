@@ -32,14 +32,18 @@
                 <div class="card-footer text-center">
                     {{product?.description}}
                 </div>
-                <div class="row text-center mb-2">
-                    <div class="col">
-                        <button class="btn btn-info" (click)=detailProductComponent(product)> Details </button>
+                <button class="btn btn-info text-center mb-2" (click)=detailProductComponent(product)> Details </button>
+                <form class="m-auto" [formGroup]="quantityForm" (ngSubmit)="cartDetail(product)">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInput">Quantity : </label>
+                    <input type="text" class="form-control mb-2 ml-2 p-2" placeholder="Quantity" formControlName="quantity">
                     </div>
-                    <div class="col">
-                        <button class="btn btn-success"> Add To Cart </button>
+                    <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2" (click)="cartButton($event.target)">Add To Cart</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

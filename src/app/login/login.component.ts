@@ -21,11 +21,11 @@ export class LoginComponent {
     this.loginservice.createloginservice(this.LoginUser.getRawValue()).subscribe(
       data => {
         console.log(data);
-        this.loginservice.setToken(data.token);
+        this.loginservice.setToken(data.token, data.user);
         this.router.navigate(['']);
       },
       err => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
       }
     );
   }

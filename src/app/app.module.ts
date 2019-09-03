@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import {  ProductListComponent } from './product-list/product-list.component'
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { UserService } from './userservices/user.service';
 import { ProductService } from './product-list/product.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { CartDetailService } from './checkoutservices/cart-detail.service';
+import { TokenInterceptor } from './authentication-interceptor';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     LogoutComponent,
     HomeComponent,
     ProductDetailComponent,
+    CartDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,11 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [UserService, ProductService],
+  providers: [UserService, ProductService, CartDetailService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

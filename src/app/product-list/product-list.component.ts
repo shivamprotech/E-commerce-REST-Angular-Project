@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
 import { Observable, Subscription } from 'rxjs';
 import { UserService } from '../userservices/user.service';
+import { CartDetailService } from '../checkoutservices/cart-detail.service';
 
 @Component({
     selector: 'app-product-list',
@@ -16,12 +17,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
     name: string;
     params: string;
     sub: Subscription;
+    quantity: any;
+    productId: any;
+
 
     constructor(private productService: ProductService,
                 private fb: FormBuilder,
                 private route: ActivatedRoute,
                 private router: Router,
-                private userService: UserService) { }
+                private userService: UserService,
+                private cartDetailService: CartDetailService) { }
+
+    quantityForm = this.fb.group({
+        quantity: ['']
+    });
 
     ngOnInit() {
         this.sub = this.route.paramMap.subscribe((params) => {
@@ -31,18 +40,26 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
     getProducts() {
-        if (this.userService.getToken()) {
-            if (this.params) {
-                this.name = this.route.snapshot.paramMap.get('search');
-                this.productService.searchProduct(this.name).subscribe(data => {
-                    this.products = data;
-                });
-            } else {
-                this.productService.getProducts().subscribe(data => {
-                    this.products = data;
-                });
-            }
+        if (this.params) {
+            this.name = this.route.snapshot.paramMap.get('search');
+            this.productService.searchProduct(this.name).subscribe(data => {
+                this.products = data;
+            });
+        } else {
+            this.productService.getProducts().subscribe(data => {
+                this.products = data;
+            });
         }
+    }
+
+    cartDetail(product) {
+        this.productId = product.id;
+        this.quantity = this.quantityForm.get('quantity').value;
+        this.cartDetailService.createCartDetail(this.productId, this.quantity).subscribe(data => console.log(data));
+    }
+
+    cartButton(event) {
+        event.textContent = 'View Cart';
     }
 
     // deleteProductComponent(product: any) {

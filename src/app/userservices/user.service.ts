@@ -22,17 +22,22 @@ export class UserService {
         return this.http.post(this.url + 'customers/logoutapi/', '');
     }
 
-    setToken(token: string) {
+    setToken(token: string, user: string) {
         localStorage.setItem('token', token);
-        // localStorage.setItem('key', key);
+        localStorage.setItem('user', user);
     }
 
     getToken() {
         return localStorage.getItem('token');
     }
 
+    getUser() {
+        return localStorage.getItem('user');
+    }
+
     deleteToken() {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
     }
 
     isLoggedIn() {

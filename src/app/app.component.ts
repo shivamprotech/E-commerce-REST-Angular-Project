@@ -47,4 +47,8 @@ export class AppComponent {
         this.searchName = this.searchProductName.get('search').value;
         return this.router.navigate(['/product', {search: this.searchName }]);
     }
+
+    getUser() {
+        return this.userService.getUser();
+    }
 }

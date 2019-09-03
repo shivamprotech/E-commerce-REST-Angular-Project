@@ -26,6 +26,14 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" formControlName="search" name="search">
                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
             </form>
+            <ul class="navbar-nav" *ngIf=getUser()>
+                <li class="nav-item">
+                    <a class="nav-link">Welcome {{getUser()}}</a>
+                </li>
+                <li class="nav-item" *ngIf="isLogin()">
+                    <a class="nav-link" routerLink='/cart-detail'><i class="fas fa-cart-arrow-down"></i> ( )</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
