@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from './userservices/user.service';
-import { Router, NavigationExtras } from '@angular/router';
-import { ProductListComponent } from './product-list/product-list.component';
+import { Router } from '@angular/router';
 import { ProductService } from './product-list/product.service';
 import { FormBuilder } from '@angular/forms';
 
@@ -14,9 +13,10 @@ export class AppComponent {
     title = 'second-project';
     products: any[];
     searchName: any;
-     constructor(private userService: UserService,
-                 private router: Router,
-                 private productlist: ProductService, private fb: FormBuilder) { }
+
+    constructor(private userService: UserService,
+                private router: Router,
+                private productlist: ProductService, private fb: FormBuilder) { }
 
         searchProductName = this.fb.group({
             search : ['']

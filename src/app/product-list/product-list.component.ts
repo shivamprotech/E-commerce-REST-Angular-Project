@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from './product.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { UserService } from '../userservices/user.service';
 import { CartDetailService } from '../checkoutservices/cart-detail.service';
 
@@ -19,7 +18,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     sub: Subscription;
     quantity: any;
     productId: any;
-
+    showMsg = false;
 
     constructor(private productService: ProductService,
                 private fb: FormBuilder,
@@ -55,10 +54,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
     cartDetail(product) {
         this.productId = product.id;
         this.quantity = this.quantityForm.get('quantity').value;
-        this.cartDetailService.createCartDetail(this.productId, this.quantity).subscribe(data => console.log(data));
+        this.cartDetailService.createCartDetail(this.productId, this.quantity).subscribe(data =>{
+            console.log(data)
+        },
+            err => {
+                console.log(err)
+            return this.router.navigate(['/login']);
+        });
+
     }
 
     cartButton(event) {
+        this.showMsg = true;
         event.textContent = 'View Cart';
     }
 

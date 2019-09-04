@@ -15,6 +15,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { CartDetailService } from './checkoutservices/cart-detail.service';
 import { TokenInterceptor } from './authentication-interceptor';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TokenInterceptor } from './authentication-interceptor';
     HomeComponent,
     ProductDetailComponent,
     CartDetailComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

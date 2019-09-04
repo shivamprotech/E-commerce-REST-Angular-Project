@@ -16,6 +16,7 @@
             </tr>
         </tbody>
     </table> -->
+    <p *ngIf="showMsg" class="text-center text-sucess">Product Has Been Added To Cart</p>
     <div class="row">
         <div class="col-md-4 mt-4" *ngFor="let product of products">
             <div class="card">
@@ -40,7 +41,7 @@
                     <input type="text" class="form-control mb-2 ml-2 p-2" placeholder="Quantity" formControlName="quantity">
                     </div>
                     <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-2" (click)="cartButton($event.target)">Add To Cart</button>
+                        <button type="submit" class="btn btn-primary mb-2">Add To Cart</button>
                     </div>
                 </div>
                 </form>

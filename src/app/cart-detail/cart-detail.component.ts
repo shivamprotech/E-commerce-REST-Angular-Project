@@ -10,16 +10,33 @@ import { ProductService } from '../product-list/product.service';
   styleUrls: ['./cart-detail.component.css']
 })
 export class CartDetailComponent implements OnInit {
-  productId: any;
+  productId: any[] = [];
   products: any;
-  quantity: any;
-  constructor(private cartDetailService: CartDetailService,
-              private route: Router,
-              private router: ActivatedRoute,
-              private userService: UserService,
-              private productService: ProductService ) { }
+  customerProducts: any[] = [];
+  // product: any;
+  productstesting: any;
+  constructor(
+    private cartDetailService: CartDetailService,
+    private route: Router,
+    private router: ActivatedRoute,
+    private userService: UserService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit() {
-   
+    this.cartDetailService.showCartDetail().subscribe(data => {
+      this.products = data[0].customer_cart_detail;
+      const apis = this.products.map(items => {
+        return this.productService.detailProduct(items.product).subscribe(data => {
+            data.quantity = items.quantity;
+            this.customerProducts.push(data);
+            console.log(items);
+          });
+      });
+    });
+  }
+
+  createOrder() {
+    return this.route.navigate(['/order']);
   }
 }

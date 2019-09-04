@@ -7,6 +7,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {path : '', component: HomeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path : 'logout', component: LogoutComponent},
   {path : 'product', component: ProductListComponent},
   {path : 'product-detail', component: ProductDetailComponent},
-  {path : 'cart-detail/:id', component: CartDetailComponent },
+  {path : 'cart-detail', component: CartDetailComponent },
+  {path : 'order', component: OrderComponent },
 ];
 
 @NgModule({

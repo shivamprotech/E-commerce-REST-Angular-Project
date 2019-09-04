@@ -13,6 +13,7 @@ export class ProductDetailComponent implements OnInit {
   productId: string;
   params: string;
   sub: Subscription;
+  showMsg: boolean;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
 
@@ -24,6 +25,7 @@ export class ProductDetailComponent implements OnInit {
     this.productId = this.route.snapshot.paramMap.get('productId');
     return this.productService.detailProduct(this.productId).subscribe(data => {
       this.product = data;
+      this.showMsg = true;
       console.log(this.product);
     });
   }

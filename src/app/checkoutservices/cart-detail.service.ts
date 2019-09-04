@@ -15,7 +15,7 @@ export class CartDetailService {
             quantity: noOfQuantity});
     }
 
-    showCartDetail(id): Observable<any> {
-        return this.http.get('http://127.0.0.1:8080/carts/detail/' + String(id));
+    showCartDetail(): Observable<any> {
+        return this.http.get('http://127.0.0.1:8080/carts/detail/');
     }
 }
