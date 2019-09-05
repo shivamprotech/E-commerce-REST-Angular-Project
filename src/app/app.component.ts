@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from './userservices/user.service';
+import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
-import { ProductService } from './product-list/product.service';
+import { ProductService } from './services/product.service';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -50,5 +50,9 @@ export class AppComponent {
 
     getUser() {
         return this.userService.getUser();
+    }
+
+    cartDetail(){
+        this.userService.cartDetail()
     }
 }

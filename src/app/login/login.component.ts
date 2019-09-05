@@ -1,21 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../userservices/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  return: any;
   token: string;
-  constructor(private fb: FormBuilder, private loginservice: UserService, private router: Router) { }
 
   LoginUser = this.fb.group({
     username: [''],
     password: [''],
   });
+
+  constructor(private fb: FormBuilder, private loginservice: UserService, private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.queryParams
+    .subscribe(params => this.return = params['return'] || '/product');
+  }
 
   login() {
     this.loginservice.createloginservice(this.LoginUser.getRawValue()).subscribe(

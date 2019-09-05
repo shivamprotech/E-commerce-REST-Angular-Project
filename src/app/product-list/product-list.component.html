@@ -16,9 +16,13 @@
             </tr>
         </tbody>
     </table> -->
-    <p *ngIf="showMsg" class="text-center text-sucess">Product Has Been Added To Cart</p>
+    
     <div class="row">
+        <div class="col-md-12">
+            <p *ngIf="showMsg" class="text-center text-success">Product Has Been Added To Cart</p>
+        </div>
         <div class="col-md-4 mt-4" *ngFor="let product of products">
+            
             <div class="card">
                 <div class="card-header">
                     <div class="card-title text-center">
@@ -34,14 +38,14 @@
                     {{product?.description}}
                 </div>
                 <button class="btn btn-info text-center mb-2" (click)=detailProductComponent(product)> Details </button>
-                <form class="m-auto" [formGroup]="quantityForm" (ngSubmit)="cartDetail(product)">
+                <form class="m-auto" #myForm [formGroup]="quantityForm" (ngSubmit)="quantityForm.valid && cartDetail(product)">
                 <div class="form-row align-items-center">
                     <div class="col-auto">
                     <label class="sr-only" for="inlineFormInput">Quantity : </label>
-                    <input type="text" class="form-control mb-2 ml-2 p-2" placeholder="Quantity" formControlName="quantity">
+                    <input type="text" class="form-control mb-2 ml-2 p-2" placeholder="Quantity" formControlName="quantity" required>
                     </div>
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">Add To Cart</button>
+                        <button type="submit" class="btn btn-primary mb-2" (click)="cartButton($event.target)" >Add To Cart</button>
                     </div>
                 </div>
                 </form>

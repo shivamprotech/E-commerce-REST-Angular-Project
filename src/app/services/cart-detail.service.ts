@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserService } from '../userservices/user.service';
 
 
 @Injectable()
 export class CartDetailService {
-    constructor(private http: HttpClient,private userService: UserService) {
+    constructor(private http: HttpClient) {
     }
 
     createCartDetail(productName: any, noOfQuantity: any): Observable<any> {

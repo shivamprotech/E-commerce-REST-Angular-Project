@@ -8,6 +8,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { OrderComponent } from './order/order.component';
+import { PaymentComponent } from './payment/payment.component';
+import { CanActivateRouteGuard } from './guards/can-activate-route.guard';
 
 const routes: Routes = [
   {path : '', component: HomeComponent},
@@ -16,8 +18,9 @@ const routes: Routes = [
   {path : 'logout', component: LogoutComponent},
   {path : 'product', component: ProductListComponent},
   {path : 'product-detail', component: ProductDetailComponent},
-  {path : 'cart-detail', component: CartDetailComponent },
-  {path : 'order', component: OrderComponent },
+  {path : 'cart-detail', component: CartDetailComponent, canActivate: [CanActivateRouteGuard] },
+  {path : 'order', component: OrderComponent, canActivate: [CanActivateRouteGuard] },
+  {path : 'payment', component: PaymentComponent },
 ];
 
 @NgModule({

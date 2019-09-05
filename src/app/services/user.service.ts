@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { CartDetailService } from './cart-detail.service';
 
 
 @Injectable()
 export class UserService {
     url: string;
-    constructor(private http: HttpClient) {
-        this.url = 'http://127.0.0.1:8080/'
+    cartItem = 0;
+    constructor(private http: HttpClient, private router: Router, private cartDetailService: CartDetailService) {
+        this.url = 'http://127.0.0.1:8080/';
      }
 
     createUserservice(User): Observable<any> {
@@ -46,4 +49,11 @@ export class UserService {
         }
         return false;
     }
+
+    cartDetail() {
+        this.cartDetailService.showCartDetail().subscribe(data => {
+            
+        });
+    }
 }
+

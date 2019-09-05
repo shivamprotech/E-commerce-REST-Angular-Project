@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CartDetailService } from '../checkoutservices/cart-detail.service';
+import { CartDetailService } from '../services/cart-detail.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from '../userservices/user.service';
-import { ProductService } from '../product-list/product.service';
+import { UserService } from '../services/user.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-cart-detail',
@@ -15,6 +15,7 @@ export class CartDetailComponent implements OnInit {
   customerProducts: any[] = [];
   // product: any;
   productstesting: any;
+  totalPrice = 0;
   constructor(
     private cartDetailService: CartDetailService,
     private route: Router,
@@ -29,6 +30,7 @@ export class CartDetailComponent implements OnInit {
       const apis = this.products.map(items => {
         return this.productService.detailProduct(items.product).subscribe(data => {
             data.quantity = items.quantity;
+            this.totalPrice = this.totalPrice + data.cost * data.quantity;
             this.customerProducts.push(data);
             console.log(items);
           });
@@ -37,6 +39,6 @@ export class CartDetailComponent implements OnInit {
   }
 
   createOrder() {
-    return this.route.navigate(['/order']);
+    return this.route.navigate(['/order', {totalPrice: this.totalPrice}]);
   }
 }

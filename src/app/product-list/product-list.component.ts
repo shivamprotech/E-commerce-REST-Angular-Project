@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from './product.service';
-import { FormBuilder } from '@angular/forms';
+import { ProductService } from '../services/product.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserService } from '../userservices/user.service';
-import { CartDetailService } from '../checkoutservices/cart-detail.service';
+import { UserService } from '../services/user.service';
+import { CartDetailService } from '../services/cart-detail.service';
 
 @Component({
     selector: 'app-product-list',
@@ -18,7 +18,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     sub: Subscription;
     quantity: any;
     productId: any;
+    cartItem = 0;
     showMsg = false;
+    addToCart = true;
+    buttonDisabled: boolean;
 
     constructor(private productService: ProductService,
                 private fb: FormBuilder,
@@ -28,7 +31,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
                 private cartDetailService: CartDetailService) { }
 
     quantityForm = this.fb.group({
-        quantity: ['']
+        quantity: ['1', [Validators.required]]
     });
 
     ngOnInit() {
@@ -52,20 +55,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
     cartDetail(product) {
-        this.productId = product.id;
-        this.quantity = this.quantityForm.get('quantity').value;
-        this.cartDetailService.createCartDetail(this.productId, this.quantity).subscribe(data =>{
-            console.log(data)
-        },
-            err => {
-                console.log(err)
-            return this.router.navigate(['/login']);
-        });
+        if (this.userService.isLoggedIn) {
+            this.productId = product.id;
+            this.quantity = this.quantityForm.get('quantity').value;
+            this.cartDetailService.createCartDetail(this.productId, this.quantity).subscribe(data => {
+                this.showMsg = true });
+        } else {
+            return this.router.navigate(['login']);
+        }
 
     }
 
     cartButton(event) {
-        this.showMsg = true;
         event.textContent = 'View Cart';
     }
 

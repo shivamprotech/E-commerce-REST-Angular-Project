@@ -9,13 +9,16 @@ import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
-import { UserService } from './userservices/user.service';
-import { ProductService } from './product-list/product.service';
+import { UserService } from './services/user.service';
+import { ProductService } from './services/product.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
-import { CartDetailService } from './checkoutservices/cart-detail.service';
+import { CartDetailService } from './services/cart-detail.service';
 import { TokenInterceptor } from './authentication-interceptor';
 import { OrderComponent } from './order/order.component';
+import { OrderService } from './services/order.service';
+import { PaymentComponent } from './payment/payment.component';
+import { CanActivateRouteGuard } from './guards/can-activate-route.guard';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { OrderComponent } from './order/order.component';
     ProductDetailComponent,
     CartDetailComponent,
     OrderComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { OrderComponent } from './order/order.component';
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  }],
+  }, OrderService, CanActivateRouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
